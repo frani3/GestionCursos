@@ -2,6 +2,8 @@ package com.gestioncursos.gestioncursos.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +29,7 @@ public class Curso {
     @Column(length = 200, nullable = false)
     private String descripcion;
 
-
+    @Enumerated(EnumType.STRING)
+    private EstadoCurso estadoCurso = EstadoCurso.Activo; // Por defecto, el curso está activo
     
 }

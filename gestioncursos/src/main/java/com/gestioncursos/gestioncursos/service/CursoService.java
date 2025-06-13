@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestioncursos.gestioncursos.model.Curso;
+import com.gestioncursos.gestioncursos.model.EstadoCurso;
 import com.gestioncursos.gestioncursos.repository.CursoRepository;
 
 @Service
@@ -34,24 +35,29 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
+    public List<Curso> findCursosPorEstado(EstadoCurso estadoCurso) {
+        return cursoRepository.findByEstadoCurso(estadoCurso);
+    }
+
     public Curso editCurso(Integer idCurso, Curso curso) {
         Optional<Curso> cursoExistente = cursoRepository.findById(idCurso);
         if (cursoExistente != null) {
             Curso cursoActualizado = cursoExistente.get();
             cursoActualizado.setNombre(curso.getNombre());
             cursoActualizado.setDescripcion(curso.getDescripcion());
+            cursoActualizado.setEstadoCurso(curso.getEstadoCurso());
             return cursoRepository.save(cursoActualizado);
         }
         return null;
     }
 
-    public Curso eliminarCurso(int idCurso) {
-        Curso curso = cursoRepository.findById(idCurso);
-        if (curso != null) {
-            cursoRepository.deleteById(idCurso);
-            return curso;
-        }
-        return null;
+    public Curso editEstadoCurso(int idCurso, Curso curso) {
+    Curso cursoExistente = cursoRepository.findById(idCurso);
+    if (cursoExistente != null) {
+        cursoExistente.setEstadoCurso(curso.getEstadoCurso());
+        return cursoRepository.save(cursoExistente);
     }
+    return null;
+}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.gestioncursos.gestioncursos.model.Curso;
+import com.gestioncursos.gestioncursos.model.EstadoCurso;
 
 
 @Repository
@@ -22,7 +23,9 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
     Curso save(Curso curso);
     Curso findById(int idCurso);
     List<Curso> findAll();
-    Curso deleteById(int idCurso);
+    List<Curso> findByEstadoCurso(EstadoCurso estadoCurso);
+    /// Curso deleteById(int idCurso); NO VA
+    
     
 
     
